@@ -1,1 +1,1 @@
-module.exports = require('./lib/selector');
+exports.prefix = require('./lib/prefix');

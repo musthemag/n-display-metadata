@@ -12,12 +12,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@financial-times/n-gage": "^2.0.1",
     "chai": "^4.1.2",
-    "mocha": "^5.1.1",
-    "rosie": "^2.0.1"
+    "mocha": "^5.1.1"
   }
 }
