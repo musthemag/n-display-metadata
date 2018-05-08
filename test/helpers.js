@@ -5,7 +5,7 @@ exports.createAnnotation = function (id, prefLabel, type, predicate) {
 	return {
 		id,
 		prefLabel,
-		type: Types[type],
+		directType: Types[type],
 		predicate: Predicates[predicate]
 	};
 };
