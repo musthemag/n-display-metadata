@@ -1,2 +1,1 @@
-exports.prefix = require('./lib/prefix');
-exports.label = require('./lib/label');
+exports.teaser = require('./lib/teaser');

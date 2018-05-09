@@ -1,8 +1,8 @@
 const { expect } = require('chai');
-const helpers = require('./helpers');
-const { prefix: subject } = require('../');
+const helpers = require('../helpers');
+const subject = require('../../').teaser.prefix;
 
-describe('Prefix', () => {
+describe('Teaser Prefix', () => {
 	const containedIn = [
 		{
 			title: 'Meet the work tribes'

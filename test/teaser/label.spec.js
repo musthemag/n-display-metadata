@@ -1,8 +1,8 @@
 const { expect } = require('chai');
-const helpers = require('./helpers');
-const { label: subject } = require('../');
+const helpers = require('../helpers');
+const subject = require('../../').teaser.label;
 
-describe('Label', () => {
+describe('Teaser Label', () => {
 	const containedIn = [
 		{
 			title: 'Meet the work tribes'
