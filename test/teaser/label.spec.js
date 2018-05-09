@@ -30,10 +30,10 @@ describe('Teaser Label', () => {
 				helpers.createAnnotation('FT View', 'Brand', 'ClassifiedBy')
 			];
 
-			it('returns the display concept', () => {
+			it('returns nothing', () => {
 				const result = subject({ annotations, containedIn });
 
-				expect(result.prefLabel).to.equal('Fallback');
+				expect(result).to.be.undefined;
 			});
 		});
 	});
@@ -72,24 +72,11 @@ describe('Teaser Label', () => {
 				helpers.createAnnotation('Chinese Trade', 'Topic', 'About'),
 			];
 
-			it('returns the display concept', () => {
+			it('returns nothing', () => {
 				const result = subject({ annotations });
 
-				expect(result.prefLabel).to.equal('Fallback');
+				expect(result).to.be.undefined;
 			});
-		});
-	});
-
-	context('and there is a display concept', () => {
-		const annotations = [
-			helpers.createAnnotation('News', 'Genre', 'ClassifiedBy'),
-			helpers.createAnnotation('Telecoms', 'Topic', 'About'),
-		];
-
-		it('returns the display concept', () => {
-			const result = subject({ annotations });
-
-			expect(result.prefLabel).to.equal('Fallback');
 		});
 	});
 });
