@@ -3,6 +3,12 @@ const helpers = require('./helpers');
 const { prefix: subject } = require('../');
 
 describe('Prefix', () => {
+	const containedIn = [
+		{
+			title: 'Meet the work tribes'
+		}
+	];
+
 	context('when the content is tagged with the genre "opinion"', () => {
 		context('and it is tagged with a brand', () => {
 			const annotations = [
@@ -12,7 +18,7 @@ describe('Prefix', () => {
 			];
 
 			it('returns the brand label', () => {
-				const result = subject({ annotations });
+				const result = subject({ annotations, containedIn });
 
 				expect(result).to.equal('Authersʼ Note');
 			});
@@ -25,7 +31,7 @@ describe('Prefix', () => {
 			];
 
 			it('returns nothing', () => {
-				const result = subject({ annotations });
+				const result = subject({ annotations, containedIn });
 
 				expect(result).to.null;
 			});
@@ -33,12 +39,6 @@ describe('Prefix', () => {
 	});
 
 	context('when the content is part of a package', () => {
-		const containedIn = [
-			{
-				title: 'Meet the work tribes'
-			}
-		];
-
 		context('and it is tagged with a brand', () => {
 			const annotations = [
 				helpers.createAnnotation(123, 'Feature', 'Genre', 'ClassifiedBy'),

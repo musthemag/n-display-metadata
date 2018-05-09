@@ -3,6 +3,12 @@ const helpers = require('./helpers');
 const { label: subject } = require('../');
 
 describe('Label', () => {
+	const containedIn = [
+		{
+			title: 'Meet the work tribes'
+		}
+	];
+
 	context('when the content is tagged with the genre "opinion"', () => {
 		context('and it is tagged with one author', () => {
 			const annotations = [
@@ -12,7 +18,7 @@ describe('Label', () => {
 			];
 
 			it('returns the author concept', () => {
-				const result = subject({ annotations });
+				const result = subject({ annotations, containedIn });
 
 				expect(result.prefLabel).to.equal('John Authers');
 			});
@@ -25,7 +31,7 @@ describe('Label', () => {
 			];
 
 			it('returns the display concept', () => {
-				const result = subject({ annotations });
+				const result = subject({ annotations, containedIn });
 
 				expect(result.prefLabel).to.equal('Fallback');
 			});
@@ -36,12 +42,6 @@ describe('Label', () => {
 		const annotations = [
 			helpers.createAnnotation(123, 'Feature', 'Genre', 'ClassifiedBy'),
 			helpers.createAnnotation(456, 'Work Tribes', 'Brand', 'ClassifiedBy')
-		];
-
-		const containedIn = [
-			{
-				title: 'Meet the work tribes'
-			}
 		];
 
 		it('returns the package title', () => {
