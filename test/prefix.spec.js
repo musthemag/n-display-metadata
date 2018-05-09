@@ -8,7 +8,7 @@ describe('Prefix', () => {
 			const annotations = [
 				helpers.createAnnotation(123, 'Opinion', 'Genre', 'ClassifiedBy'),
 				helpers.createAnnotation(456, 'Authersʼ Note', 'Brand', 'ClassifiedBy'),
-				helpers.createAnnotation(789, 'John Authers', 'Person', 'HasAuthor')
+				helpers.createAnnotation(789, 'John Authers', 'Person', 'Author')
 			];
 
 			context('and we are not on the brand stream page', () => {
@@ -32,7 +32,7 @@ describe('Prefix', () => {
 		context('and it is not tagged with a brand', () => {
 			const annotations = [
 				helpers.createAnnotation(123, 'Opinion', 'Genre', 'ClassifiedBy'),
-				helpers.createAnnotation(789, 'John Authers', 'Person', 'HasAuthor')
+				helpers.createAnnotation(789, 'John Authers', 'Person', 'Author')
 			];
 
 			it('returns nothing', () => {

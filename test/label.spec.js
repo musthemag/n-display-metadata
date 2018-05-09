@@ -6,11 +6,11 @@ describe('Label', () => {
 	const displayConcept = helpers.createAnnotation(111, 'Technology', 'Topic', 'About');
 
 	context('when the content is tagged with the genre "opinion"', () => {
-		context('and it is tagged with one author', () => {
+		context.only('and it is tagged with one author', () => {
 			const annotations = [
 				helpers.createAnnotation(123, 'Opinion', 'Genre', 'ClassifiedBy'),
 				helpers.createAnnotation(456, 'Authersʼ Note', 'Brand', 'ClassifiedBy'),
-				helpers.createAnnotation(789, 'John Authers', 'Person', 'HasAuthor')
+				helpers.createAnnotation(789, 'John Authers', 'Person', 'Author')
 			];
 
 			context('and we are not on the author stream page', () => {
@@ -38,7 +38,7 @@ describe('Label', () => {
 				helpers.createAnnotation(456, 'FT View', 'Brand', 'ClassifiedBy')
 			];
 
-			context('and it has a display concept selected', () => {
+			context('and there is a display co', () => {
 				context('and we are not on the display concept stream page', () => {
 					it('returns the display concept', () => {
 						const result = subject({ annotations, displayConcept });
@@ -110,7 +110,7 @@ describe('Label', () => {
 				helpers.createAnnotation(789, 'Chinese Trade', 'Topic', 'About'),
 			];
 
-			context('and it has a display concept selected', () => {
+			context('and there is a display co', () => {
 				context('and we are not on the display concept stream page', () => {
 					it('returns the display concept', () => {
 						const result = subject({ annotations, displayConcept });
@@ -131,7 +131,7 @@ describe('Label', () => {
 		});
 	});
 
-	context('and it has a display concept selected', () => {
+	context('and there is a display co', () => {
 		const annotations = [
 			helpers.createAnnotation(123, 'News', 'Genre', 'ClassifiedBy'),
 			helpers.createAnnotation(456, 'Telecoms', 'Topic', 'About'),
