@@ -27,7 +27,7 @@ describe('Teaser Fallback Label', () => {
 		});
 
 		it('picks second type "isPrimarilyClassifiedBy"', () => {
-			const annotations = fixture.filter(({ directType, predicate }) => (
+			const annotations = fixture.filter(({ predicate }) => (
 				predicate !== Predicates.About
 			));
 
@@ -35,7 +35,7 @@ describe('Teaser Fallback Label', () => {
 		});
 
 		it('picks third type "topic"', () => {
-			const annotations = fixture.filter(({ directType, predicate }) => (
+			const annotations = fixture.filter(({ predicate }) => (
 				predicate !== Predicates.About
 				&& predicate !== Predicates.PrimarilyClassifiedBy
 			));

@@ -33,7 +33,7 @@ describe('Teaser Prefix', () => {
 			it('returns nothing', () => {
 				const result = subject({ annotations, containedIn });
 
-				expect(result).to.null;
+				expect(result).to.be.undefined;
 			});
 		});
 	});
@@ -60,7 +60,7 @@ describe('Teaser Prefix', () => {
 			it('returns nothing', () => {
 				const result = subject({ annotations, containedIn });
 
-				expect(result).to.be.null;
+				expect(result).to.be.undefined;
 			});
 		});
 	});
