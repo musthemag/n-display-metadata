@@ -18,7 +18,7 @@ const fixture = [
 	helpers.createAnnotation('Brian Groom', 'Person', 'Author'),
 ];
 
-describe('Teaser Fallback Label', () => {
+describe('Teaser Fallback Link', () => {
 	context('with legacy display context waterfall', () => {
 		it('picks first type "about" annotation', () => {
 			const annotations = fixture;
