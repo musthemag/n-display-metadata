@@ -3,8 +3,6 @@ const helpers = require('./helpers');
 const { label: subject } = require('../');
 
 describe('Label', () => {
-	const displayConcept = helpers.createAnnotation(111, 'Technology', 'Topic', 'About');
-
 	context('when the content is tagged with the genre "opinion"', () => {
 		context('and it is tagged with one author', () => {
 			const annotations = [
@@ -13,22 +11,10 @@ describe('Label', () => {
 				helpers.createAnnotation(789, 'John Authers', 'Person', 'Author')
 			];
 
-			context('and we are not on the author stream page', () => {
-				it('returns the author concept', () => {
-					const result = subject({ annotations, displayConcept });
+			it('returns the author concept', () => {
+				const result = subject({ annotations });
 
-					expect(result.prefLabel).to.equal('John Authers');
-				});
-			});
-
-			context('and we are on the author stream page', () => {
-				it('returns the display concept', () => {
-					const context = { id: 456 };
-
-					const result = subject({ annotations, displayConcept, context });
-
-					expect(result.prefLabel).to.equal('John Authers');
-				});
+				expect(result.prefLabel).to.equal('John Authers');
 			});
 		});
 
@@ -38,23 +24,10 @@ describe('Label', () => {
 				helpers.createAnnotation(456, 'FT View', 'Brand', 'ClassifiedBy')
 			];
 
-			context('and there is a display co', () => {
-				context('and we are not on the display concept stream page', () => {
-					it('returns the display concept', () => {
-						const result = subject({ annotations, displayConcept });
+			it('returns the display concept', () => {
+				const result = subject({ annotations });
 
-						expect(result.prefLabel).to.equal('Technology');
-					});
-				});
-
-				context('and we are on the display concept stream page', () => {
-					it('returns nothing', () => {
-						const context = { id: 111 };
-						const result = subject({ annotations, displayConcept, context });
-
-						expect(result).to.be.undefined;
-					});
-				});
+				expect(result.prefLabel).to.equal('Fallback');
 			});
 		});
 	});
@@ -72,7 +45,7 @@ describe('Label', () => {
 		];
 
 		it('returns the package title', () => {
-			const result = subject({ annotations, displayConcept, containedIn });
+			const result = subject({ annotations, containedIn });
 
 			expect(result.prefLabel).to.equal('Meet the work tribes');
 		});
@@ -86,21 +59,10 @@ describe('Label', () => {
 				helpers.createAnnotation(789, 'Chinese Trade', 'Topic', 'About'),
 			];
 
-			context('and we are not on the brand stream page', () => {
-				it('returns the brand label', () => {
-					const result = subject({ annotations, displayConcept });
+			it('returns the brand label', () => {
+				const result = subject({ annotations });
 
-					expect(result.prefLabel).to.equal('The Big Read');
-				});
-			});
-
-			context('and we are on the brand stream page', () => {
-				it('returns the display concept', () => {
-					const context = { id: 456 };
-					const result = subject({ annotations, displayConcept, context });
-
-					expect(result.prefLabel).to.equal('Technology');
-				});
+				expect(result.prefLabel).to.equal('The Big Read');
 			});
 		});
 
@@ -110,48 +72,24 @@ describe('Label', () => {
 				helpers.createAnnotation(789, 'Chinese Trade', 'Topic', 'About'),
 			];
 
-			context('and there is a display co', () => {
-				context('and we are not on the display concept stream page', () => {
-					it('returns the display concept', () => {
-						const result = subject({ annotations, displayConcept });
+			it('returns the display concept', () => {
+				const result = subject({ annotations });
 
-						expect(result.prefLabel).to.equal('Technology');
-					});
-				});
-
-				context('and we are on the display concept stream page', () => {
-					it('returns nothing', () => {
-						const context = { id: 111 };
-						const result = subject({ annotations, displayConcept, context });
-
-						expect(result).to.be.undefined;
-					});
-				});
+				expect(result.prefLabel).to.equal('Fallback');
 			});
 		});
 	});
 
-	context('and there is a display co', () => {
+	context('and there is a display concept', () => {
 		const annotations = [
 			helpers.createAnnotation(123, 'News', 'Genre', 'ClassifiedBy'),
 			helpers.createAnnotation(456, 'Telecoms', 'Topic', 'About'),
 		];
 
-		context('and we are not on the display concept stream page', () => {
-			it('returns the display concept', () => {
-				const result = subject({ annotations, displayConcept });
+		it('returns the display concept', () => {
+			const result = subject({ annotations });
 
-				expect(result.prefLabel).to.equal('Technology');
-			});
-		});
-
-		context('and we are on the display concept stream page', () => {
-			it('returns nothing', () => {
-				const context = { id: 111 };
-				const result = subject({ annotations, displayConcept, context });
-
-				expect(result).to.be.undefined;
-			});
+			expect(result.prefLabel).to.equal('Fallback');
 		});
 	});
 });
