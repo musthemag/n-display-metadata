@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const helpers = require('../helpers');
 const Predicates = require('../../lib/constants/predicates');
 const Types = require('../../lib/constants/types');
-const subject = require('../../').teaser.fallback;
+const subject = require('../../lib/teaser/fallback-link');
 
 describe('Teaser Fallback Link', () => {
 	context('with display tag', () => {

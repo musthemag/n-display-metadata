@@ -16,8 +16,7 @@ $ npm i -S @financial-times/n-display-metadata
 ```js
 const metadata = require('@financial-times/n-display-metadata');
 
-const teaserMetaPrefix = metadata.teaser.prefix(content);
-const teaserMetaLink = metadata.teaser.link(content);
+const teaserMeta = metadata.teaser(content);
 ```
 
 ## Logic
