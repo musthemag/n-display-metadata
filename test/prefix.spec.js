@@ -46,27 +46,27 @@ describe('Prefix', () => {
 	context('when the content is part of a package', () => {
 		const containedIn = [
 			{
-				title: 'A Collection'
+				title: 'Meet the work tribes'
 			}
 		];
 
 		context('and it is tagged with a brand', () => {
 			const annotations = [
-				helpers.createAnnotation(123, 'FT Wealth', 'Brand', 'ClassifiedBy'),
-				helpers.createAnnotation(456, 'Wealth Management', 'Topic', 'About')
+				helpers.createAnnotation(123, 'Feature', 'Genre', 'ClassifiedBy'),
+				helpers.createAnnotation(456, 'Work Tribes', 'Brand', 'ClassifiedBy')
 			];
 
 			context('and we are not on the brand stream page', () => {
 				it('returns the brand label', () => {
 					const result = subject({ annotations, containedIn });
 
-					expect(result).to.equal('FT Wealth');
+					expect(result).to.equal('Work Tribes');
 				});
 			});
 
 			context('and we are on the brand stream page', () => {
 				it('returns nothing', () => {
-					const context = { id: 123 };
+					const context = { id: 456 };
 					const result = subject({ annotations, containedIn, context });
 
 					expect(result).to.be.undefined;
@@ -90,7 +90,8 @@ describe('Prefix', () => {
 	context('when the genre tag is allowed to be displayed', () => {
 		const annotations = [
 			helpers.createAnnotation(123, 'Analysis', 'Genre', 'ClassifiedBy'),
-			helpers.createAnnotation(456, 'Chinese Trade', 'Topic', 'About')
+			helpers.createAnnotation(456, 'The Big Read', 'Brand', 'ClassifiedBy'),
+			helpers.createAnnotation(789, 'Chinese Trade', 'Topic', 'About'),
 		];
 
 		context('and we are not on the genre stream page', () => {
