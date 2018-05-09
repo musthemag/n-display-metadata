@@ -11,21 +11,10 @@ describe('Prefix', () => {
 				helpers.createAnnotation(789, 'John Authers', 'Person', 'Author')
 			];
 
-			context('and we are not on the brand stream page', () => {
-				it('returns the brand label', () => {
-					const result = subject({ annotations });
+			it('returns the brand label', () => {
+				const result = subject({ annotations });
 
-					expect(result).to.equal('Authersʼ Note');
-				});
-			});
-
-			context('and we are on the brand stream page', () => {
-				it('returns nothing', () => {
-					const context = { id: 456 };
-					const result = subject({ annotations, context });
-
-					expect(result).to.be.undefined;
-				});
+				expect(result).to.equal('Authersʼ Note');
 			});
 		});
 
@@ -38,7 +27,7 @@ describe('Prefix', () => {
 			it('returns nothing', () => {
 				const result = subject({ annotations });
 
-				expect(result).to.undefined;
+				expect(result).to.null;
 			});
 		});
 	});
@@ -56,21 +45,10 @@ describe('Prefix', () => {
 				helpers.createAnnotation(456, 'Work Tribes', 'Brand', 'ClassifiedBy')
 			];
 
-			context('and we are not on the brand stream page', () => {
-				it('returns the brand label', () => {
-					const result = subject({ annotations, containedIn });
+			it('returns the brand label', () => {
+				const result = subject({ annotations, containedIn });
 
-					expect(result).to.equal('Work Tribes');
-				});
-			});
-
-			context('and we are on the brand stream page', () => {
-				it('returns nothing', () => {
-					const context = { id: 456 };
-					const result = subject({ annotations, containedIn, context });
-
-					expect(result).to.be.undefined;
-				});
+				expect(result).to.equal('Work Tribes');
 			});
 		});
 
@@ -82,7 +60,7 @@ describe('Prefix', () => {
 			it('returns nothing', () => {
 				const result = subject({ annotations, containedIn });
 
-				expect(result).to.be.undefined;
+				expect(result).to.be.null;
 			});
 		});
 	});
@@ -94,23 +72,10 @@ describe('Prefix', () => {
 			helpers.createAnnotation(789, 'Chinese Trade', 'Topic', 'About'),
 		];
 
-		context('and we are not on the genre stream page', () => {
-			it('returns the genre label', () => {
-				const result = subject({ annotations });
+		it('returns the genre label', () => {
+			const result = subject({ annotations });
 
-				expect(result).to.equal('Analysis');
-			});
-		});
-
-		context('and we are on the genre stream page', () => {
-			it('returns nothing', () => {
-				it('returns the genre label', () => {
-					const context = { id: 123 };
-					const result = subject({ annotations, context });
-
-					expect(result).to.be.undefined;
-				});
-			});
+			expect(result).to.equal('Analysis');
 		});
 	});
 });
