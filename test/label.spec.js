@@ -6,7 +6,7 @@ describe('Label', () => {
 	const displayConcept = helpers.createAnnotation(111, 'Technology', 'Topic', 'About');
 
 	context('when the content is tagged with the genre "opinion"', () => {
-		context.only('and it is tagged with one author', () => {
+		context('and it is tagged with one author', () => {
 			const annotations = [
 				helpers.createAnnotation(123, 'Opinion', 'Genre', 'ClassifiedBy'),
 				helpers.createAnnotation(456, 'Authersʼ Note', 'Brand', 'ClassifiedBy'),
