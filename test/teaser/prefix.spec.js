@@ -12,9 +12,9 @@ describe('Teaser Prefix', () => {
 	context('when the content is tagged with the genre "opinion"', () => {
 		context('and it is tagged with a brand', () => {
 			const annotations = [
-				helpers.createAnnotation(123, 'Opinion', 'Genre', 'ClassifiedBy'),
-				helpers.createAnnotation(456, 'Authersʼ Note', 'Brand', 'ClassifiedBy'),
-				helpers.createAnnotation(789, 'John Authers', 'Person', 'Author')
+				helpers.createAnnotation('Opinion', 'Genre', 'ClassifiedBy'),
+				helpers.createAnnotation('Authersʼ Note', 'Brand', 'ClassifiedBy'),
+				helpers.createAnnotation('John Authers', 'Person', 'Author')
 			];
 
 			it('returns the brand label', () => {
@@ -26,8 +26,8 @@ describe('Teaser Prefix', () => {
 
 		context('and it is not tagged with a brand', () => {
 			const annotations = [
-				helpers.createAnnotation(123, 'Opinion', 'Genre', 'ClassifiedBy'),
-				helpers.createAnnotation(789, 'John Authers', 'Person', 'Author')
+				helpers.createAnnotation('Opinion', 'Genre', 'ClassifiedBy'),
+				helpers.createAnnotation('John Authers', 'Person', 'Author')
 			];
 
 			it('returns nothing', () => {
@@ -41,8 +41,8 @@ describe('Teaser Prefix', () => {
 	context('when the content is part of a package', () => {
 		context('and it is tagged with a brand', () => {
 			const annotations = [
-				helpers.createAnnotation(123, 'Feature', 'Genre', 'ClassifiedBy'),
-				helpers.createAnnotation(456, 'Work Tribes', 'Brand', 'ClassifiedBy')
+				helpers.createAnnotation('Feature', 'Genre', 'ClassifiedBy'),
+				helpers.createAnnotation('Work Tribes', 'Brand', 'ClassifiedBy')
 			];
 
 			it('returns the brand label', () => {
@@ -54,7 +54,7 @@ describe('Teaser Prefix', () => {
 
 		context('and it is not tagged with a brand', () => {
 			const annotations = [
-				helpers.createAnnotation(456, 'Wealth Management', 'Topic', 'About')
+				helpers.createAnnotation('Wealth Management', 'Topic', 'About')
 			];
 
 			it('returns nothing', () => {
@@ -67,9 +67,9 @@ describe('Teaser Prefix', () => {
 
 	context('when the genre tag is allowed to be displayed', () => {
 		const annotations = [
-			helpers.createAnnotation(123, 'Analysis', 'Genre', 'ClassifiedBy'),
-			helpers.createAnnotation(456, 'The Big Read', 'Brand', 'ClassifiedBy'),
-			helpers.createAnnotation(789, 'Chinese Trade', 'Topic', 'About'),
+			helpers.createAnnotation('Analysis', 'Genre', 'ClassifiedBy'),
+			helpers.createAnnotation('The Big Read', 'Brand', 'ClassifiedBy'),
+			helpers.createAnnotation('Chinese Trade', 'Topic', 'About'),
 		];
 
 		it('returns the genre label', () => {
