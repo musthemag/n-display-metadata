@@ -1,10 +1,10 @@
 const { expect } = require('chai');
 const helpers = require('../helpers');
-const Predicates = require('../../lib/constants/predicates');
 const Types = require('../../lib/constants/types');
-const subject = require('../../lib/teaser/secondary-link');
+const Predicates = require('../../lib/constants/predicates');
+const subject = require('../../lib/teaser/alternative-link');
 
-describe('Teaser Fallback Link', () => {
+describe('Teaser Alternative Link', () => {
 	context('with display tag', () => {
 		const fixture = [
 			helpers.createAnnotation('UK Trade', 'Topic', 'About'),

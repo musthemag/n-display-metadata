@@ -1,8 +1,8 @@
 const { expect } = require('chai');
 const helpers = require('../helpers');
-const subject = require('../../lib/teaser/primary-link');
+const subject = require('../../lib/teaser/leading-link');
 
-describe('Teaser Primary Link', () => {
+describe('Teaser Leading Link', () => {
 	const containedIn = [
 		{
 			title: 'Meet the work tribes'
