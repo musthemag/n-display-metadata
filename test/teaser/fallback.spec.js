@@ -4,26 +4,37 @@ const Predicates = require('../../lib/constants/predicates');
 const Types = require('../../lib/constants/types');
 const subject = require('../../').teaser.fallback;
 
-const fixture = [
-	helpers.createAnnotation('Brexit', 'Topic', 'MajorMentions'),
-	helpers.createAnnotation('Unilever', 'Organisation', 'MajorMentions'),
-	helpers.createAnnotation('HSBC', 'Organisation', 'Mentions'),
-	helpers.createAnnotation('Special Report', 'Genre', 'ClassifiedBy'),
-	helpers.createAnnotation('Companies', 'Section', 'PrimarilyClassifiedBy'),
-	helpers.createAnnotation('UK Politics & Policy', 'Section', 'ClassifiedBy'),
-	helpers.createAnnotation('United Kingdom', 'Location', 'Mentions'),
-	helpers.createAnnotation('Innovation', 'Topic', 'Mentions'),
-	helpers.createAnnotation('The Big Read', 'Brand', 'ClassifiedBy'),
-	helpers.createAnnotation('UK Trade', 'Topic', 'About'),
-	helpers.createAnnotation('Brian Groom', 'Person', 'Author'),
-];
-
 describe('Teaser Fallback Link', () => {
-	context('with legacy display context waterfall', () => {
-		it('picks first type "about" annotation', () => {
-			const annotations = fixture;
+	context('with display tag', () => {
+		const fixture = [
+			helpers.createAnnotation('UK Trade', 'Topic', 'About'),
+			helpers.createAnnotation('Brexit', 'Topic', 'MajorMentions'),
+			helpers.createAnnotation('Companies', 'Section', 'PrimarilyClassifiedBy'),
+			helpers.createAnnotation('The Big Read', 'Brand', 'DisplayTag')
+		];
 
-			expect(subject(annotations).prefLabel).to.equal('UK Trade');
+		it('picks the "display tag"', () => {
+			expect(subject(fixture).prefLabel).to.equal('The Big Read');
+		});
+	});
+
+	context('with legacy display context waterfall', () => {
+		const fixture = [
+			helpers.createAnnotation('Brexit', 'Topic', 'MajorMentions'),
+			helpers.createAnnotation('Unilever', 'Organisation', 'MajorMentions'),
+			helpers.createAnnotation('HSBC', 'Organisation', 'Mentions'),
+			helpers.createAnnotation('Special Report', 'Genre', 'ClassifiedBy'),
+			helpers.createAnnotation('Companies', 'Section', 'PrimarilyClassifiedBy'),
+			helpers.createAnnotation('UK Politics & Policy', 'Section', 'ClassifiedBy'),
+			helpers.createAnnotation('United Kingdom', 'Location', 'Mentions'),
+			helpers.createAnnotation('Innovation', 'Topic', 'Mentions'),
+			helpers.createAnnotation('The Big Read', 'Brand', 'ClassifiedBy'),
+			helpers.createAnnotation('UK Trade', 'Topic', 'About'),
+			helpers.createAnnotation('Brian Groom', 'Person', 'Author'),
+		];
+
+		it('picks first type "about" annotation', () => {
+			expect(subject(fixture).prefLabel).to.equal('UK Trade');
 		});
 
 		it('picks second type "isPrimarilyClassifiedBy"', () => {
