@@ -51,7 +51,7 @@ describe('Teaser Leading Link', () => {
 		});
 	});
 
-	context('when the genre tag is allowed to be displayed', () => {
+	context('when the genre tag is allowed to be branded', () => {
 		context('and it is tagged with a brand', () => {
 			const annotations = [
 				helpers.createAnnotation('Analysis', 'Genre', 'ClassifiedBy'),
