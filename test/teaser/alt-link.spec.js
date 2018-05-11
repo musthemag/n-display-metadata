@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const helpers = require('../helpers');
 const Types = require('../../lib/constants/types');
 const Predicates = require('../../lib/constants/predicates');
-const subject = require('../../lib/teaser/alternative-link');
+const subject = require('../../lib/teaser/alt-link');
 
 describe('Teaser Alternative Link', () => {
 	context('with display tag', () => {

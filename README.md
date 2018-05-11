@@ -20,7 +20,7 @@ const teaserMetadata = metadata.teaser(content);
 
 ### `.teaser(content)`
 
-Returns an object with 3 properties:- `prefixText`, `leadLink` and `altLink`.
+Returns an object with 3 properties:- `prefixText`, `link` and `altLink`.
 
 ### `.topper(content)`
 
