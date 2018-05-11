@@ -20,7 +20,7 @@ const teaserMetadata = metadata.teaser(content);
 
 ### `.teaser(content)`
 
-Returns an object with 3 properties:- `prefixText`, `link` and `altLink`.
+Returns an object with 3 properties:- `prefixText`, `link` and `altLink`. The `altLink` can be used when the current context of the teaser is the same as the `link`, e.g. to avoid displaying links to "FastFT" on the FastFT stream page.
 
 ### `.topper(content)`
 
@@ -28,7 +28,7 @@ TODO
 
 ## Logic
 
-Both teasers and toppers are capable of displaying two pieces of metadata:- a prefix  and a leading link.
+Both teasers and toppers are capable of displaying two pieces of metadata:- a prefix and a link. Though similar decisions may be made for each, they are not strictly connected.
 
 ### Teasers
 
