@@ -1,9 +1,6 @@
 # n-display-metadata
 
-This module encapsulates the editorially selected logic for deciding which metadata items to display in teasers and article toppers. The metadata items may be a [concept] or a reference to a parent [package].
-
-[concept]: https://github.com/Financial-Times/types-ft-content-api/blob/master/concepts/Concept.d.ts
-[package]: https://github.com/Financial-Times/types-ft-content-api/blob/master/content/Package.d.ts
+This module encapsulates the editorially selected logic for deciding which metadata items to display in teasers and article toppers.
 
 ## Installation
 
@@ -16,18 +13,25 @@ $ npm i -S @financial-times/n-display-metadata
 ```js
 const metadata = require('@financial-times/n-display-metadata');
 
-const teaserMeta = metadata.teaser(content);
+const teaserMetadata = metadata.teaser(content);
 ```
+
+## API
+
+### `.teaser(content)`
+
+Returns an object with 3 properties:- `prefixText`, `leadLink` and `altLink`.
+
+### `.topper(content)`
+
+TODO
 
 ## Logic
 
-Both teasers and toppers are capable of displaying two pieces of metadata:- a text prefix and a link. The two pieces of information are connected.
+Both teasers and toppers are capable of displaying two pieces of metadata:- a prefix  and a leading link.
 
 ### Teasers
 
-The logic for choosing annotations to display on teasers was decided by Mus and Guy on 03/05/2018 and implemented by Matt Hinchliffe on 09/05/2018.
+The logic for choosing which metadata to display on teasers was last decided by Mus and Guy on 10/05/2018 and implemented by Matt Hinchliffe on 11/05/2018.
 
-The decision trees can be seen here:-
-
-- [prefix](https://github.com/Financial-Times/n-concept-selector/blob/master/docs/Teaser_Prefix_2018-05-03.png)
-- [link](https://github.com/Financial-Times/n-concept-selector/blob/master/docs/Teaser_Tag_2018-05-03.png)
+The current decision trees can be seen in the [docs folder](https://github.com/Financial-Times/n-display-metadata/blob/master/docs/)
