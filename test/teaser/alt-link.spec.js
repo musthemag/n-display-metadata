@@ -14,7 +14,8 @@ describe('Teaser Alternative Link', () => {
 		];
 
 		it('picks the "display tag"', () => {
-			expect(subject(fixture).prefLabel).to.equal('The Big Read');
+			const result = subject({ annotations: fixture });
+			expect(result.prefLabel).to.equal('The Big Read');
 		});
 	});
 
@@ -34,7 +35,8 @@ describe('Teaser Alternative Link', () => {
 		];
 
 		it('picks first type "about" annotation', () => {
-			expect(subject(fixture).prefLabel).to.equal('UK Trade');
+			const result = subject({ annotations: fixture });
+			expect(result.prefLabel).to.equal('UK Trade');
 		});
 
 		it('picks second type "isPrimarilyClassifiedBy"', () => {
@@ -42,7 +44,8 @@ describe('Teaser Alternative Link', () => {
 				predicate !== Predicates.About
 			));
 
-			expect(subject(annotations).prefLabel).to.equal('Companies');
+			const result = subject({ annotations });
+			expect(result.prefLabel).to.equal('Companies');
 		});
 
 		it('picks third type "topic"', () => {
@@ -51,7 +54,8 @@ describe('Teaser Alternative Link', () => {
 				&& predicate !== Predicates.PrimarilyClassifiedBy
 			));
 
-			expect(subject(annotations).prefLabel).to.equal('Brexit');
+			const result = subject({ annotations });
+			expect(result.prefLabel).to.equal('Brexit');
 		});
 
 		it('picks fourth type "section"', () => {
@@ -61,7 +65,8 @@ describe('Teaser Alternative Link', () => {
 				&& directType !== Types.Topic
 			));
 
-			expect(subject(annotations).prefLabel).to.equal('UK Politics & Policy');
+			const result = subject({ annotations });
+			expect(result.prefLabel).to.equal('UK Politics & Policy');
 		});
 
 		it('picks fifth type "brand"', () => {
@@ -72,7 +77,8 @@ describe('Teaser Alternative Link', () => {
 				&& directType !== Types.Section
 			));
 
-			expect(subject(annotations).prefLabel).to.equal('The Big Read');
+			const result = subject({ annotations });
+			expect(result.prefLabel).to.equal('The Big Read');
 		});
 
 		it('picks sixth type "isClassifiedBy"', () => {
@@ -84,7 +90,8 @@ describe('Teaser Alternative Link', () => {
 				&& directType !== Types.Brand
 			));
 
-			expect(subject(annotations).prefLabel).to.equal('Special Report');
+			const result = subject({ annotations });
+			expect(result.prefLabel).to.equal('Special Report');
 		});
 
 		it('returns nothing if there is no eligible fallback annotation', () => {
@@ -97,7 +104,8 @@ describe('Teaser Alternative Link', () => {
 				&& predicate !== Predicates.ClassifiedBy
 			));
 
-			expect(subject(annotations)).to.be.undefined;
+			const result = subject({ annotations });
+			expect(result).to.be.undefined;
 		});
 	});
 });
