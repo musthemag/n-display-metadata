@@ -1,0 +1,94 @@
+version: 2
+
+references:
+
+  container_config: &container_config
+    working_directory: ~/project/build
+    docker:
+      # Primary image - all commands will be run in the container instance of this image
+      - image: circleci/node:8.11.1
+
+  workspace_root: &workspace_root
+    ~/project
+
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *workspace_root
+
+  # TODO: how does this work?
+  npm_cache_keys: &npm_cache_keys
+    keys:
+        - v1-dependency-npm-{{ checksum "package.json" }}-
+        - v1-dependency-npm-{{ checksum "package.json" }}
+        - v1-dependency-npm-
+
+  cache_npm_cache: &cache_npm_cache
+    save_cache:
+        key: v1-dependency-npm-{{ checksum "package.json" }}-{{ epoch }}
+        paths:
+        - ./node_modules/
+
+  restore_npm_cache: &restore_npm_cache
+    restore_cache:
+        <<: *npm_cache_keys
+
+  filters_ignore_tags: &filters_ignore_tags
+    tags:
+      ignore: /.*/
+
+jobs:
+
+  build:
+    <<: *container_config
+    steps:
+      - checkout
+      - *restore_npm_cache
+      # TODO: is this necessary? Does npm handle this for us now?
+      - run:
+          name: Remove extraneous node dependencies from restored cache
+          command: if [ -e package.json ]; then npm prune --production=false --no-package-lock; fi
+      - run:
+          name: Install project dependencies
+          command: make install
+      # TODO: what does this do?
+      - run:
+          name: Install project peer dependencies
+          command: |
+            if [ -e package.json ]; then
+              npm ls --production --parseable 2>&1 >/dev/null | \
+                sed -n -e 's/^npm ERR! peer dep missing: \(.*\),.*/\1/p' | \
+                xargs npm install --no-package-lock
+            fi
+      - *cache_npm_cache
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - build
+
+  test:
+    <<: *container_config
+    steps:
+      - *attach_workspace
+      - run:
+          name: Run tests
+          command: make test
+
+  publish:
+    <<: *container_config
+    steps:
+      - *attach_workspace
+      # TODO: store NPM auth token
+      - run:
+          name: Publish to NPM
+          command: echo "TODO Publish to NPM"
+
+workflows:
+  version: 2
+  build-test:
+    jobs:
+      - build:
+          filters:
+            <<: *filters_ignore_tags
+      - test:
+          requires:
+            - build
