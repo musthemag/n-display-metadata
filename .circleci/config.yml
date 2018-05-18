@@ -113,8 +113,12 @@ workflows:
           filters:
             <<: *filters_ignore_branches
       - test:
+          filters:
+            <<: *filters_ignore_branches
           requires:
             - build
       - publish:
+          filters:
+            <<: *filters_ignore_branches
           requires:
             - test
