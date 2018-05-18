@@ -89,10 +89,9 @@ jobs:
           command: echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ${HOME}/.npmrc
       - run:
           name: Publish to NPM
-          command: echo "TODO Publish to NPM"
-          # TODO: Add commands for publishing to npm:
-          # npm version --no-git-tag-version ${CIRCLE_TAG}
-          # npm publish --access public
+          command: |
+            npm version --no-git-tag-version ${CIRCLE_TAG}
+            npm publish --access public
 
 workflows:
 
