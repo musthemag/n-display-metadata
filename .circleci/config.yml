@@ -36,6 +36,13 @@ references:
     tags:
       ignore: /.*/
 
+  filters_ignore_branches: &filters_ignore_branches
+    tags:
+      only:
+        - /^v?\d+\.\d+\.\d+(?:-beta\.\d+)?$/
+    branches:
+      ignore: /.*/
+
 jobs:
 
   build:
@@ -77,13 +84,20 @@ jobs:
     <<: *container_config
     steps:
       - *attach_workspace
+
       # TODO: store NPM auth token
+      # TODO: Add commands for publishing to npm:
+      # npm version --no-git-tag-version ${CIRCLE_TAG}
+      # npm publish --access public
+
       - run:
           name: Publish to NPM
           command: echo "TODO Publish to NPM"
 
 workflows:
+
   version: 2
+
   build-test:
     jobs:
       - build:
@@ -92,3 +106,15 @@ workflows:
       - test:
           requires:
             - build
+
+  build-test-publish:
+    jobs:
+      - build:
+          filters:
+            <<: *filters_ignore_branches
+      - test:
+          requires:
+            - build
+      - publish:
+          requires:
+            - test
