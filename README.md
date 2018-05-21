@@ -16,15 +16,25 @@ const metadata = require('@financial-times/n-display-metadata');
 const teaserMetadata = metadata.teaser(content);
 ```
 
+References to the variable `content` refer to a content item either from the [internal enriched content API][1] or the [FT.com Elasticsearch cluster][2]. The content should have an `annotations` property (which is an array of concepts and their relationship to the content) and `containedIn` property (which is an array of packages which contain the content).
+
+[1]: https://github.com/Financial-Times/types-ft-content-api/tree/master/content
+[2]: https://github.com/Financial-Times/next-es-interface/tree/master/server/schemas/types
+
+
 ## API
 
 ### `.teaser(content)`
 
-Returns an object with 3 properties:- `prefixText`, `link` and `altLink`. The `altLink` can be used when the current context of the teaser is the same as the `link`, e.g. to avoid displaying links to "FastFT" on the FastFT stream page.
+Returns an object with 3 properties:- `prefixText`, `link` and `altLink`. The `altLink` can be used when the current context of the teaser is the same as the `link`, e.g. to avoid displaying links to "FastFT" on the FastFT stream page. It is up to the implementor to add this logic.
 
 ### `.topper(content)`
 
-TODO
+Coming soon.
+
+## Content
+
+All
 
 ## Logic
 
