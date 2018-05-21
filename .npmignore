@@ -1,0 +1,6 @@
+.circleci/
+docs/
+test/
+ft.yml
+Makefile
+secret-squirrel.js
