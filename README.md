@@ -1,5 +1,7 @@
 # n-display-metadata
 
+[![CircleCI](https://img.shields.io/circleci/project/github/Financial-Times/n-display-metadata/master.svg)](https://circleci.com/gh/Financial-Times/n-display-metadata) [![NPM version](https://img.shields.io/npm/v/@financial-times/n-display-metadata.svg)](https://www.npmjs.com/package/@financial-times/n-display-metadata)
+
 This module encapsulates the editorially selected logic for deciding which metadata items to display in teasers and article toppers.
 
 ## Installation
