@@ -79,9 +79,6 @@ jobs:
       - run:
           name: Run tests
           command: make test
-      - run:
-          name: Run test output
-          command: make unit-test-output
           environment:
             MOCHA_FILE: test-results/mocha/results.xml
       - store_test_results:
