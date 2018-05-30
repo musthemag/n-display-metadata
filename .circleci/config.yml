@@ -76,7 +76,6 @@ jobs:
     <<: *container_config
     steps:
       - *attach_workspace
-      - run: mkdir ~/junit
       - run:
           name: Run tests
           command: make test
@@ -84,10 +83,9 @@ jobs:
           name: Run test output
           command: make unit-test-output
           environment:
-            MOCHA_FILE: junit/test-results.xml
-          when: always
+            MOCHA_FILE: test-results/mocha/results.xml
       - store_test_results:
-          path: ~/junit
+          path: test-results
 
 
   publish:
