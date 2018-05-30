@@ -83,6 +83,8 @@ jobs:
             MOCHA_FILE: test-results/mocha/results.xml
       - store_test_results:
           path: test-results
+      - store_artifacts:
+          path: test-results
 
 
   publish:
