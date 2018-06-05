@@ -6,11 +6,21 @@ This module encapsulates the editorially selected logic for deciding which metad
 
 ## Installation
 
+This is a [Node.js][node] module available through the [npm][npm] registry. Before installing, download and install Node.js. Node.js 6 or higher is required.
+
+Installation is done using the [npm install][install] command:
+
 ```sh
-$ npm i -S @financial-times/n-display-metadata
+$ npm install -S @financial-times/n-display-metadata
 ```
 
+[node]: https://nodejs.org/en/
+[npm]: https://www.npmjs.com/
+[install]: https://docs.npmjs.com/getting-started/installing-npm-packages-locally
+
 ## Usage
+
+This module provides a method for each use case. Currently there is just one method for choosing which metadata to display on the [teaser].
 
 ```js
 const metadata = require('@financial-times/n-display-metadata');
@@ -20,6 +30,7 @@ const teaserMetadata = metadata.teaser(content);
 
 References to the variable `content` refer to a content item either from the [internal enriched content API][1] or the [FT.com Elasticsearch cluster][2]. The content should have an `annotations` property (which is an array of concepts and their relationship to the content) and `containedIn` property (which is an array of packages which contain the content).
 
+[teaser]: https://github.com/Financial-Times/o-teaser/
 [1]: https://github.com/Financial-Times/types-ft-content-api/tree/master/content
 [2]: https://github.com/Financial-Times/next-es-interface/tree/master/server/schemas/types
 
