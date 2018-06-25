@@ -146,11 +146,11 @@ workflows:
   nightly:
     triggers:
       - schedule:
-        # Every night at 02:45
-        # (randomised time to stop builds queueing up in CI)
-        cron: "45 2 * * *"
-        filters:
-          <<: *filters_only_master
+          # Every night at 02:45
+          # (randomised time to stop builds queueing up in CI)
+          cron: "45 2 * * *"
+          filters:
+            <<: *filters_only_master
     jobs:
       - build
       - test:
