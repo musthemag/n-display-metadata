@@ -39,7 +39,7 @@ references:
     tags:
       ignore: /.*/
 
-  filters_ignore_branches: &filters_ignore_branches
+  filters_version_tag: &filters_version_tag
     tags:
       only:
         - /^v?\d+\.\d+\.\d+(?:-beta\.\d+)?$/
@@ -122,15 +122,15 @@ workflows:
     jobs:
       - build:
           filters:
-            <<: *filters_ignore_branches
+            <<: *filters_version_tag
       - test:
           filters:
-            <<: *filters_ignore_branches
+            <<: *filters_version_tag
           requires:
             - build
       - publish:
           filters:
-            <<: *filters_ignore_branches
+            <<: *filters_version_tag
           requires:
             - test
 
