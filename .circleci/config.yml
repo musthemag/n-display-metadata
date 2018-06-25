@@ -1,3 +1,4 @@
+# template: component
 version: 2
 
 references:
@@ -5,8 +6,12 @@ references:
   container_config_node8: &container_config_node8
     working_directory: ~/project/build
     docker:
-      # Primary image - all commands will be run in the container instance of this image
       - image: circleci/node:8
+
+  container_config_lambda_node8: &container_config_lambda_node8
+    working_directory: ~/project/build
+    docker:
+      - image: lambci/lambda:build-nodejs8.10
 
   workspace_root: &workspace_root
     ~/project
@@ -34,6 +39,10 @@ references:
   filters_only_master: &filters_only_master
     branches:
       only: master
+
+  filters_ignore_master: &filters_ignore_master
+    branches:
+      ignore: master
 
   filters_ignore_tags: &filters_ignore_tags
     tags:
@@ -137,11 +146,11 @@ workflows:
   nightly:
     triggers:
       - schedule:
-          # Every night at 02:45
-          # (randomised time to stop builds queueing up in CI)
-          cron: "45 2 * * *"
-          filters:
-            <<: *filters_only_master
+        # Every night at 02:45
+        # (randomised time to stop builds queueing up in CI)
+        cron: "45 2 * * *"
+        filters:
+          <<: *filters_only_master
     jobs:
       - build
       - test:
