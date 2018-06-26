@@ -1,12 +1,17 @@
+# template: component
 version: 2
 
 references:
 
-  container_config: &container_config
+  container_config_node8: &container_config_node8
     working_directory: ~/project/build
     docker:
-      # Primary image - all commands will be run in the container instance of this image
-      - image: circleci/node:8.11.1
+      - image: circleci/node:8
+
+  container_config_lambda_node8: &container_config_lambda_node8
+    working_directory: ~/project/build
+    docker:
+      - image: lambci/lambda:build-nodejs8.10
 
   workspace_root: &workspace_root
     ~/project
@@ -15,7 +20,6 @@ references:
     attach_workspace:
       at: *workspace_root
 
-  # TODO: how does this work?
   npm_cache_keys: &npm_cache_keys
     keys:
         - v1-dependency-npm-{{ checksum "package.json" }}-
@@ -32,11 +36,19 @@ references:
     restore_cache:
         <<: *npm_cache_keys
 
+  filters_only_master: &filters_only_master
+    branches:
+      only: master
+
+  filters_ignore_master: &filters_ignore_master
+    branches:
+      ignore: master
+
   filters_ignore_tags: &filters_ignore_tags
     tags:
       ignore: /.*/
 
-  filters_ignore_branches: &filters_ignore_branches
+  filters_version_tag: &filters_version_tag
     tags:
       only:
         - /^v?\d+\.\d+\.\d+(?:-beta\.\d+)?$/
@@ -46,40 +58,44 @@ references:
 jobs:
 
   build:
-    <<: *container_config
+    <<: *container_config_node8
     steps:
       - checkout
-      - *restore_npm_cache
-      # TODO: is this necessary? Does npm handle this for us now?
       - run:
-          name: Remove extraneous node dependencies from restored cache
-          command: if [ -e package.json ]; then npm prune --production=false --no-package-lock; fi
+          name: Checkout next-ci-shared-helpers
+          command: git clone --depth 1 git@github.com:Financial-Times/next-ci-shared-helpers.git .circleci/shared-helpers
+      - *restore_npm_cache
       - run:
           name: Install project dependencies
           command: make install
-      # TODO: what does this do?
       - run:
-          name: Install project peer dependencies
-          command: |
-            if [ -e package.json ]; then
-              npm ls --production --parseable 2>&1 >/dev/null | \
-                sed -n -e 's/^npm ERR! peer dep missing: \(.*\),.*/\1/p' | \
-                xargs npm install --no-package-lock
-            fi
+          name: shared-helper / npm-install-peer-deps
+          command: .circleci/shared-helpers/helper-npm-install-peer-deps
+      - run:
+          name: shared-helper / npm-update
+          command: .circleci/shared-helpers/helper-npm-update
+      - run:
+          name: shared-helper / generate-build-state-artifacts
+          command: .circleci/shared-helpers/helper-generate-build-state-artifacts
+          when: always
       - *cache_npm_cache
+      - store_artifacts:
+          path: build-state
+          destination: build-state
       - persist_to_workspace:
           root: *workspace_root
           paths:
             - build
 
   test:
-    <<: *container_config
+    <<: *container_config_node8
     steps:
       - *attach_workspace
       - run:
           name: Run tests
           command: make test
           environment:
+            JEST_JUNIT_OUTPUT: test-results/jest/results.xml
             MOCHA_FILE: test-results/mocha/results.xml
       - store_test_results:
           path: test-results
@@ -88,17 +104,15 @@ jobs:
           destination: test-results
 
   publish:
-    <<: *container_config
+    <<: *container_config_node8
     steps:
       - *attach_workspace
       - run:
-          name: Set NPM auth token
-          command: echo "//registry.npmjs.org/:_authToken=${NPM_AUTH_TOKEN}" > ${HOME}/.npmrc
+          name: shared-helper / npm-store-auth-token
+          command: .circleci/shared-helpers/helper-npm-store-auth-token
       - run:
-          name: Publish to NPM
-          command: |
-            npm version --no-git-tag-version ${CIRCLE_TAG}
-            npm publish --access public
+          name: shared-helper / npm-version-and-publish-public
+          command: .circleci/shared-helpers/helper-npm-version-and-publish-public
 
 workflows:
 
@@ -117,14 +131,28 @@ workflows:
     jobs:
       - build:
           filters:
-            <<: *filters_ignore_branches
+            <<: *filters_version_tag
       - test:
           filters:
-            <<: *filters_ignore_branches
+            <<: *filters_version_tag
           requires:
             - build
       - publish:
           filters:
-            <<: *filters_ignore_branches
+            <<: *filters_version_tag
           requires:
             - test
+
+  nightly:
+    triggers:
+      - schedule:
+          # Every night at 02:45
+          # (randomised time to stop builds queueing up in CI)
+          cron: "45 2 * * *"
+          filters:
+            <<: *filters_only_master
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
