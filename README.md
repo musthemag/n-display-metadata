@@ -22,10 +22,14 @@ $ npm install -S @financial-times/n-display-metadata
 
 This module provides a method for each use case. Currently there is just one method for choosing which metadata to display on the [teaser].
 
+// TODO: figure out what the sentence above means and adapt it. Also update the code example and explanation below
+
 ```js
 const metadata = require('@financial-times/n-display-metadata');
 
 const teaserMetadata = metadata.teaser(content);
+
+const topperMetadata = metadata.topper(content);
 ```
 
 References to the variable `content` refer to a content item either from the [internal enriched content API][1] or the [FT.com Elasticsearch cluster][2]. The content should have an `annotations` property (which is an array of concepts and their relationship to the content) and `containedIn` property (which is an array of packages which contain the content).
@@ -43,7 +47,7 @@ Returns an object with 3 properties:- `prefixText`, `link` and `altLink`. The `a
 
 ### `.topper(content)`
 
-Coming soon.
+Returns an object with 2 properties:- `prefix` and `link`. The prefix can be a link or text.
 
 ## Content
 
@@ -57,4 +61,15 @@ Both teasers and toppers are capable of displaying two pieces of metadata:- a pr
 
 The logic for choosing which metadata to display on teasers was last decided by Mus and Guy on 10/05/2018 and implemented by Matt Hinchliffe on 11/05/2018.
 
-The current decision trees can be seen in the [docs folder](https://github.com/Financial-Times/n-display-metadata/blob/master/docs/)
+The current decision trees can be seen in the [docs folder](https://github.com/Financial-Times/n-display-metadata/blob/master/docs/).
+
+### Toppers
+
+The logic for choosing which metadata to display in the article topper above the headline was last decided by Mus and Guy on xx/xx/2018 and implemented by Luke Kavanagh on xx/xx/2018
+
+The current decision tree can be seen in the [docs folder](https://github.com/Financial-Times/n-display-metadata/blob/master/docs/).
+
+TODO
+* how to handle the prefix? prefixLink or prefix
+* should topper contain author? seems like lots of logic for that is already here in flags
+* should topper contain isOpinion and isWeekend type info?
