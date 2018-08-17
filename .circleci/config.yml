@@ -1,12 +1,12 @@
+# generator: n-circle2-cli
 # template: component
-version: 2
 
 references:
 
   container_config_node8: &container_config_node8
     working_directory: ~/project/build
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:8-browsers
 
   container_config_lambda_node8: &container_config_lambda_node8
     working_directory: ~/project/build
@@ -55,6 +55,8 @@ references:
     branches:
       ignore: /.*/
 
+version: 2
+
 jobs:
 
   build:
@@ -69,11 +71,14 @@ jobs:
           name: Install project dependencies
           command: make install
       - run:
+          name: shared-helper / npm-update
+          command: .circleci/shared-helpers/helper-npm-update
+      - run:
           name: shared-helper / npm-install-peer-deps
           command: .circleci/shared-helpers/helper-npm-install-peer-deps
       - run:
-          name: shared-helper / npm-update
-          command: .circleci/shared-helpers/helper-npm-update
+          name: Run the project build task
+          command: make build
       - run:
           name: shared-helper / generate-build-state-artifacts
           command: .circleci/shared-helpers/helper-generate-build-state-artifacts
@@ -152,7 +157,13 @@ workflows:
           filters:
             <<: *filters_only_master
     jobs:
-      - build
+      - build:
+          context: next-nightly-build
       - test:
           requires:
             - build
+          context: next-nightly-build
+
+notify:
+  webhooks:
+    - url: https://ft-next-webhooks.herokuapp.com/circleci2-workflow
