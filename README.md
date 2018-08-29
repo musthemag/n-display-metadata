@@ -55,6 +55,6 @@ Both teasers and toppers are capable of displaying two pieces of metadata:- a pr
 
 ### Teasers
 
-The logic for choosing which metadata to display on teasers was last decided by Mus and Guy on 10/05/2018 and implemented by Matt Hinchliffe on 11/05/2018.
+The logic for choosing which metadata to display on teasers was last decided by Mus and Guy on 28/08/2018 and implemented by Matt Hinchliffe on 29/08/2018.
 
 The current decision trees can be seen in the [docs folder](https://github.com/Financial-Times/n-display-metadata/blob/master/docs/)
