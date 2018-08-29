@@ -40,7 +40,7 @@ describe('Teaser Prefix Text', () => {
 	});
 
 	context('when the content is part of a package', () => {
-		context('and it is tagged with a brand', () => {
+		context('and the package is tagged with a brand', () => {
 			const annotations = [];
 
 			it('returns the brand label', () => {
@@ -50,7 +50,7 @@ describe('Teaser Prefix Text', () => {
 			});
 		});
 
-		context('and it is not tagged with a brand', () => {
+		context('and the package is not tagged with a brand', () => {
 			const annotations = [];
 			const containedIn = {};
 
