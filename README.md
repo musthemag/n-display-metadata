@@ -57,14 +57,10 @@ All
 
 Both teasers and toppers are capable of displaying two pieces of metadata:- a prefix and a link. Though similar decisions may be made for each, they are not strictly connected.
 
-### Teasers
+### How decides the display logic?
 
-The logic for choosing which metadata to display on teasers was last decided by Mus and Guy on 28/08/2018 and implemented by Matt Hinchliffe on 29/08/2018.
+The logic for choosing which metadata to display is decided in consultation with Mus and Guy. The current decision trees can be seen in the [docs folder](https://github.com/Financial-Times/n-display-metadata/blob/master/docs/).
 
-The current decision trees can be seen in the [docs folder](https://github.com/Financial-Times/n-display-metadata/blob/master/docs/).
+Teaser logic was last decided on 28/08/2018 and implemented by Matt Hinchliffe on 29/08/2018.
 
-### Toppers
-
-The logic for choosing which metadata to display in the article topper above the headline was last decided by Mus and Guy on xx/xx/2018 and implemented by Luke Kavanagh on xx/xx/2018
-
-The current decision tree can be seen in the [docs folder](https://github.com/Financial-Times/n-display-metadata/blob/master/docs/).
+Topper logic was last decided on xx/xx/2018 and implemented by X on x/x/2018.
