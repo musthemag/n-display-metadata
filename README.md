@@ -20,9 +20,7 @@ $ npm install -S @financial-times/n-display-metadata
 
 ## Usage
 
-This module provides a method for each use case. Currently there is just one method for choosing which metadata to display on the [teaser].
-
-// TODO: figure out what the sentence above means and adapt it. Also update the code example and explanation below
+This module provides a method for each use case. There are two use case supported at the moment: teaser and topper.
 
 ```js
 const metadata = require('@financial-times/n-display-metadata');
