@@ -68,8 +68,3 @@ The current decision trees can be seen in the [docs folder](https://github.com/F
 The logic for choosing which metadata to display in the article topper above the headline was last decided by Mus and Guy on xx/xx/2018 and implemented by Luke Kavanagh on xx/xx/2018
 
 The current decision tree can be seen in the [docs folder](https://github.com/Financial-Times/n-display-metadata/blob/master/docs/).
-
-TODO
-* how to handle the prefix? prefixLink or prefix
-* should topper contain author? seems like lots of logic for that is already here in flags
-* should topper contain isOpinion and isWeekend type info?
