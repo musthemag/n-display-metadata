@@ -5,7 +5,8 @@ const subject = require('../../lib/teaser/prefix-text');
 describe('Teaser Prefix Text', () => {
 	const containedIn = [
 		{
-			title: 'Meet the work tribes'
+			title: 'Meet the work tribes',
+			brand: 'FT Series'
 		}
 	];
 
@@ -39,23 +40,19 @@ describe('Teaser Prefix Text', () => {
 	});
 
 	context('when the content is part of a package', () => {
-		context('and it is tagged with a brand', () => {
-			const annotations = [
-				helpers.createAnnotation('Feature', 'Genre', 'ClassifiedBy'),
-				helpers.createAnnotation('Work Tribes', 'Brand', 'ClassifiedBy')
-			];
+		context('and the package is tagged with a brand', () => {
+			const annotations = [];
 
 			it('returns the brand label', () => {
 				const result = subject({ annotations, containedIn });
 
-				expect(result).to.equal('Work Tribes');
+				expect(result).to.equal('FT Series');
 			});
 		});
 
-		context('and it is not tagged with a brand', () => {
-			const annotations = [
-				helpers.createAnnotation('Wealth Management', 'Topic', 'About')
-			];
+		context('and the package is not tagged with a brand', () => {
+			const annotations = [];
+			const containedIn = {};
 
 			it('returns nothing', () => {
 				const result = subject({ annotations, containedIn });
