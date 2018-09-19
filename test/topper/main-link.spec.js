@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const helpers = require('../helpers');
-const subject = require('../../lib/teaser/link');
+const subject = require('../../lib/teaser/main-link');
 
 describe('Topper Link', () => {
 

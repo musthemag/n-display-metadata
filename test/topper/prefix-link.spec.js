@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const helpers = require('../helpers');
-const subject = require('../../lib/teaser/prefix');
+const subject = require('../../lib/teaser/prefix-link');
 
 describe('Topper Prefix Link', () => {
 
