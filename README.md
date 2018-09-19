@@ -47,7 +47,7 @@ Returns an object with 3 properties:- `prefixText`, `link` and `altLink`. The `a
 
 ### `.topper(content)`
 
-Returns an object with 2 properties:- `prefix` and `link`. The prefix can be a link or text.
+Returns an object with 2 properties:- `prefixLink` and `mainLink`.
 
 ## Content
 
