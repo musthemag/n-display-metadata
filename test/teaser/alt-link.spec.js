@@ -108,4 +108,20 @@ describe('Teaser Alternative Link', () => {
 			expect(result).to.be.undefined;
 		});
 	});
+
+	context('with a primary link selected', () => {
+		const fixture = [
+			helpers.createAnnotation('UK Trade', 'Topic', 'About'),
+			helpers.createAnnotation('Brexit', 'Topic', 'MajorMentions'),
+			helpers.createAnnotation('Companies', 'Section', 'PrimarilyClassifiedBy'),
+			helpers.createAnnotation('The Big Read', 'Brand', 'DisplayTag')
+		];
+
+		const primaryLink = { prefLabel: 'The Big Read' };
+
+		it('picks the next fallback annotation', () => {
+			const result = subject({ annotations: fixture }, primaryLink);
+			expect(result.prefLabel).to.equal('UK Trade');
+		});
+	});
 });
