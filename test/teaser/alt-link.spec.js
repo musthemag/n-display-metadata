@@ -109,19 +109,19 @@ describe('Teaser Alternative Link', () => {
 		});
 	});
 
-	context('with a primary link selected', () => {
+	context('with a primary link already selected', () => {
 		const fixture = [
 			helpers.createAnnotation('UK Trade', 'Topic', 'About'),
 			helpers.createAnnotation('Brexit', 'Topic', 'MajorMentions'),
 			helpers.createAnnotation('Companies', 'Section', 'PrimarilyClassifiedBy'),
-			helpers.createAnnotation('The Big Read', 'Brand', 'DisplayTag')
+			helpers.createAnnotation('UK Trade', 'Topic', 'DisplayTag')
 		];
 
-		const primaryLink = { prefLabel: 'The Big Read' };
+		const primaryLink = fixture[0];
 
 		it('picks the next fallback annotation', () => {
 			const result = subject({ annotations: fixture }, primaryLink);
-			expect(result.prefLabel).to.equal('UK Trade');
+			expect(result.prefLabel).to.equal('Companies');
 		});
 	});
 });
